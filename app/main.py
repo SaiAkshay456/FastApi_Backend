@@ -11,8 +11,8 @@ myTextPost = {
     6: {"title": "Sixth Post", "content": "This is my sixth post content"},
     7: {"title": "Seventh Post", "content": "This is my seventh post content"},
     8: {"title": "Eighth Post", "content": "This is my eighth post content"},
-    9: {"title": "Ninth Post", "content": "This is my ninth post content"},
-    10: {"title": "Tenth Post", "content": "This is my tenth post content"},
+    9: {"title": "Ninth Post", "content": "This is mmy ninth post content"},
+    10: {"title": "Tenth Post", "content": "This is y tenth post content"},
     11: {"title": "Eleventh Post", "content": "This is my eleventh post content"},
     12: {"title": "Twelfth Post", "content": "This is my twelfth post content"},
     13: {"title": "Thirteenth Post", "content": "This is my thirteenth post content"},
@@ -34,13 +34,30 @@ def get_all_posts(limitNo:int=None):
         return dict(list(myTextPost.items())[:limitNo])
     return myTextPost
 
-@app.get("/get-post/{id}")
+@app.get("/get-post/{id}", response_model=Post)
 def getPost(id:int):
     if id not in myTextPost:
         raise HTTPException(status_code=404,detail="Post not does not exist")
-    return myTextPost.get(id)
+    return myTextPost[id]
 
 @app.post("/create/post")
-def createPost(post:Post):
-    myTextPost[post.id]={"title":post.title,"content":post.content}
+def createPost(post:Post)-> Post:
+    myTextPost[len(myTextPost)]={"title":post.title,"content":post.content}
     return myTextPost[post.id]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,3 +4,4 @@ python-dotenv
 fastapi-users[sqlalchemy]
 imagekitio
 aiosqlite
+sqlalchemy
