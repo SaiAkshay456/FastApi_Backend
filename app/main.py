@@ -1,7 +1,7 @@
 from fastapi import FastAPI,HTTPException
-from app.schema import User,Post
+# from app.schema import User,Post
+from app.db import User,create_db_and_tables,get_async_session
 app=FastAPI() 
-
 myTextPost = {
     1: {"title": "First Post", "content": "This is my first post content"},
     2: {"title": "Second Post", "content": "This is my second post content"},
@@ -44,7 +44,6 @@ def getPost(id:int):
 def createPost(post:Post)-> Post:
     myTextPost[len(myTextPost)]={"title":post.title,"content":post.content}
     return myTextPost[post.id]
-
 
 
 
