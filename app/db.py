@@ -4,7 +4,7 @@ from sqlalchemy import Column,String,Text,DateTime,ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine,async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase,relationship
-import datetime
+from datetime import datetime
 #all config related to database setup will be here
 
 DB_URL="sqlite+aiosqlite:///./test.db"
@@ -21,7 +21,6 @@ class User(Base):
 
     id=Column(UUID(as_uuid=True),primary_key=True,default=uuid.uuid4)
     fullName=Column(String(100),nullable=False)
-    username=Column(String(50),nullable=False,unique=True)
     email=Column(String(100),nullable=False,unique=True)
     password=Column(String(100),nullable=False)
     created_at=Column(DateTime,default=datetime.utcnow)
