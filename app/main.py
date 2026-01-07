@@ -15,6 +15,14 @@ app=FastAPI(lifespan=lifespan)
 
 @app.post("/create/user")
 async def createUser(user:UserCreate,session:AsyncSession=Depends(get_async_session)):
+    stmt=select(User).where(User.email==user.email)
+    execute_stmt=await session.execute(stmt)
+    existing_user=execute_stmt.scalar_one_or_none()
+    if existing_user:
+        return HTTPException(
+            status_code=402,
+            detail=f"{user.email} already exists"
+        )
     new_user=User(
         fullName=user.fullName,
         email=user.email,
@@ -30,3 +38,4 @@ async def createUser(user:UserCreate,session:AsyncSession=Depends(get_async_sess
 async def get_all_users(session:AsyncSession=Depends(get_async_session)):
     users=await session.execute(select(User))
     return users.scalars().all()
+
