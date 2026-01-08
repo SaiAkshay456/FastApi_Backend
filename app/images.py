@@ -1,7 +1,9 @@
+from dotenv import load_dotenv
 from imagekitio import ImageKit
 import os
-imageKitClient=ImageKit(
-    private_key=os.environ.get("IMAGEKIT_PRIVATE_KEY"),
-    public_key=os.environ.get("IMAGEKIT_PUBLIC_KEY"),
-    url_endpoint=os.environ.get("IMAGEKIT_URL")
+load_dotenv()
+imageKitClient = ImageKit(
+    os.environ["IMAGEKIT_PRIVATE_KEY"],
+    os.environ["IMAGEKIT_PUBLIC_KEY"],
+    os.environ["IMAGEKIT_URL"]
 )
