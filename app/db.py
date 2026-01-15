@@ -11,7 +11,7 @@ DB_URL="sqlite+aiosqlite:///./test.db"
 # this above url is for testing purpose only
 #if you want to use postgresql or other db then uncomment below line and provide your own credentials
 #EX:DB_URL="postgresql+asyncpg://username:password@localhost/dbname"
-
+#EX:DB_URL="postgresql+asyncpg://username:password@localhost/dbname"
 class Base(DeclarativeBase):
     pass
 #create data model
